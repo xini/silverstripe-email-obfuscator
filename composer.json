@@ -1,5 +1,5 @@
 {
-	"name": "innoweb/silverstripe-email-obfuscator-js-only",
+	"name": "innoweb/silverstripe-email-obfuscator",
 	"description": "Obfuscates all email addresses displayed on the site. Email addresses are revealed using Javascript. The links falls back to a global contact form when no Javascript is available.",
 	"type": "silverstripe-module",
 	"keywords": ["silverstripe", "email", "obfuscate"],
