@@ -1,0 +1,39 @@
+---
+Name: emailobfuscator
+After: 'framework/*','cms/*'
+---
+Injector:
+  HTMLText:
+    class: EmailObfuscatorHTMLText
+
+StringField:
+  extensions:
+    - EmailObfuscatorStringFieldExtension
+
+Page_Controller:
+  extensions:
+    - EmailObfuscatorPageControllerExtension
+
+---
+Only:
+  classexists: 'SubmittedFormField'
+---
+SubmittedFormField:
+  extensions:
+    - EmailObfuscatorSubmittedFormFieldExtension
+
+---
+Only:
+  classexists: 'Multisites'
+---
+Site:
+  extensions:
+    - EmailObfuscatorConfigExtension
+
+---
+Except:
+  classexists: 'Multisites'
+---
+SiteConfig:
+  extensions:
+    - EmailObfuscatorConfigExtension
