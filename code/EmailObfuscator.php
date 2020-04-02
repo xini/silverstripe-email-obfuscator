@@ -19,7 +19,7 @@ class EmailObfuscator extends Object{
 		
 		// only if not in html value attribute and not preceded by raw-span
 		//$regex[1] = '/(?P<email>[A-Z0-9\._%+\-]+@[A-Z0-9\.\-]+\.[A-Z]{2,6})/i'; // Grab the link
-		$regex[1] = '/(?<![A-Z0-9\._%+\-])(?<!value=")(?<!<span class="raw">)([A-Z0-9\._%+\-]+@[A-Z0-9\.\-]+\.[A-Z]{2,6})(?![A-Z])/i'; // Grab the link, but only if not in a html attribute
+		$regex[1] = '/((?<!")(?<!<span class="raw">)(?<![A-Z0-9\._%+\-])([A-Z0-9\._%+\-]+@[A-Z0-9\.\-]+\.[A-Z]{2,8})(?![A-Z]))/i';
 
 		$result = preg_replace_callback($regex, array('EmailObfuscator', 'self::getContactLink'), $input);
 		
