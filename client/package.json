@@ -10,11 +10,11 @@
   "license": "BSD-3-Clause",
   "dependencies": {},
   "devDependencies": {
-    "del": "^5.1.0",
+    "del": "^6.0.0",
     "gulp": "^4.0.2",
     "gulp-concat-util": "^0.5.5",
     "gulp-plumber": "^1.2.1",
-    "gulp-sourcemaps": "^2.6.5",
+    "gulp-sourcemaps": "^3.0.0",
     "gulp-strip-debug": "^3.0.0",
     "gulp-uglify": "^3.0.2"
   }
