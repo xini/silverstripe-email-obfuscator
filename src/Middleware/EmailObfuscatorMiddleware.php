@@ -32,6 +32,7 @@ class EmailObfuscatorMiddleware implements HTTPMiddleware
         if (
             $request->routeParams()['Controller'] != 'SilverStripe\Admin\AdminRootController'
             && $request->routeParams()['Controller'] != '%$SilverStripe\GraphQL\Controller.admin'
+			&& strpos(strtolower($response->getHeader('content-type')), 'text/html') !== false
         ) {
 
             $html = $response->getBody();
