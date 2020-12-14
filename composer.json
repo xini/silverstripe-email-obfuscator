@@ -1,19 +1,29 @@
 {
 	"name": "innoweb/silverstripe-email-obfuscator",
-	"description": "Obfuscates all email addresses displayed on the site. Email addresses are revealed using Javascript. The links falls back to a global contact form when no Javascript is available.",
-	"type": "silverstripe-module",
-    "license": "BSD-3-Clause",
+	"description": "Obfuscates all email addresses displayed on the site. Email addresses are revealed using Javascript.",
+	"type": "silverstripe-vendormodule",
+	"license": "BSD-3-Clause",
 	"keywords": ["silverstripe", "email", "obfuscate"],
+	"homepage": "https://github.com/xini/silverstripe-email-obfuscator",
+	"support": {
+		"issues": "https://github.com/xini/silverstripe-email-obfuscator/issues"
+	},
 	"authors": [{
 		"name": "Florian Thoma",
-		"homepage": "https://www.innoweb.com.au"
+		"homepage": "https://innoweb.com.au"
 	}],
-	"require":
-	{
-		"silverstripe/cms": "~3.1",
-		"richardsjoqvist/silverstripe-optionaltreedropdownfield": "~1.1"
+	"require": {
+		"silverstripe/vendor-plugin": "^1.0",
+		"silverstripe/cms": "^4"
 	},
-	"extra": {
-		"installer-name": "emailobfuscator"
+	"autoload": {
+		"psr-4": {
+			"Innoweb\\EmailObfuscator\\": "src/"
+		}
+    },
+    "extra": {
+        "expose": [
+            "client/dist"
+        ]
 	}
 }

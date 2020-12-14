@@ -1,39 +1,15 @@
 ---
 Name: emailobfuscator
-After: 'framework/*','cms/*'
+After:
+  - requestprocessors
 ---
-Injector:
-  HTMLText:
-    class: EmailObfuscatorHTMLText
+SilverStripe\Core\Injector\Injector:
+  SilverStripe\Control\Director:
+    properties:
+      Middlewares:
+        EmailObfuscatorMiddleware: '%$Innoweb\EmailObfuscator\Middleware\EmailObfuscatorMiddleware'
 
-StringField:
+PageController:
   extensions:
-    - EmailObfuscatorStringFieldExtension
-
-Page_Controller:
-  extensions:
-    - EmailObfuscatorPageControllerExtension
-
----
-Only:
-  classexists: 'SubmittedFormField'
----
-SubmittedFormField:
-  extensions:
-    - EmailObfuscatorSubmittedFormFieldExtension
-
----
-Only:
-  classexists: 'Multisites'
----
-Site:
-  extensions:
-    - EmailObfuscatorConfigExtension
-
----
-Except:
-  classexists: 'Multisites'
----
-SiteConfig:
-  extensions:
-    - EmailObfuscatorConfigExtension
+    - Innoweb\EmailObfuscator\Extensions\PageControllerExtension  
+  
