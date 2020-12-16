@@ -1,5 +1,5 @@
 <?php
-class EmailObfuscator extends Object{
+class EmailObfuscator extends SS_Object {
 	
 	public static function replaceEmailLinks($input) {
 	    
