@@ -6,6 +6,7 @@ use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Control\Middleware\HTTPMiddleware;
 use SilverStripe\Core\Config\Configurable;
+use Masterminds\HTML5;
 
 class EmailObfuscatorMiddleware implements HTTPMiddleware
 {
@@ -38,8 +39,8 @@ class EmailObfuscatorMiddleware implements HTTPMiddleware
             $html = $response->getBody();
 
             // replace email links usig DOMDocument parser
-            $dom = new \DOMDocument;
-            $dom->loadHTML($html);
+            $html5 = new HTML5();
+            $dom = $html5->loadHTML($html);
             $links = $dom->getElementsByTagName('a');
             foreach ($links as $link) {
                 if ($link->hasAttribute('href')&& preg_match($this->config()->email_regex, $link->getAttribute('href'), $matches)) {
@@ -58,7 +59,7 @@ class EmailObfuscatorMiddleware implements HTTPMiddleware
                     $link->textContent = $this->getLinkText($link->textContent);
                 }
             }
-            $html = $dom->saveHTML();
+            $html = $html5->saveHTML($dom);
 
             // manual replacement using regex
             if (strpos($html, '</head>') !== false) {
