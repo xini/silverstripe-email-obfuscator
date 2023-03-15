@@ -11,7 +11,9 @@ Thanks to [Plato](https://github.com/PlatoCreative/silverstripe-email-obfuscator
 
 ## Requirements
 
-* Silverstripe CMS 4.x
+* Silverstripe CMS 5.x
+
+Note: this version is compatible with SilverStripe 5. For SilverStripe 4, please see the [2 release line](https://github.com/xini/silverstripe-email-obfuscator/tree/2).
 
 ## Installation
 
