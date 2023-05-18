@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [3.1.3]
 
-* fix PHP 8.2 deprecation warning
+* fix PHP 8.1 compatibility issue
 
 ## [3.1.2]
 
