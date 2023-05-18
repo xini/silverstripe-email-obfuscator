@@ -189,7 +189,7 @@ class EmailObfuscatorMiddleware implements HTTPMiddleware
     }
 
     private function getLinkTitle($linktext) {
-        $default = _t(__CLASS__ . . ".NotDisplayedWithoutJavascript", 'E-Mail not displayed without javascript.');
+        $default = _t(__CLASS__ . ".NotDisplayedWithoutJavascript", 'E-Mail not displayed without javascript.');
         if (preg_match($this->config()->email_regex, $linktext)) {
             $linktext = $default;
         }
