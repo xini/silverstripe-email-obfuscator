@@ -1,0 +1,4 @@
+fr:
+  Innoweb\EmailObfuscator\Middleware\EmailObfuscatorMiddleware:
+    NotDisplayed: '[e-mail masqué]'
+    NotDisplayedWithoutJavascript: 'L''e-mail n''est affiché que si Javascript est activé.'

@@ -1,0 +1,4 @@
+en:
+  Innoweb\EmailObfuscator\Middleware\EmailObfuscatorMiddleware:
+    NotDisplayed: '[E-Mail not displayed]'
+    NotDisplayedWithoutJavascript: 'E-Mail not displayed without javascript.'
