@@ -40,7 +40,7 @@ class EmailObfuscatorMiddleware implements HTTPMiddleware
 
             // replace email links usig DOMDocument parser
             $html5 = new HTML5();
-            $dom = $html5->loadHTML($html);
+            $dom = $html5->loadHTML($html ?? '');
             $links = $dom->getElementsByTagName('a');
             foreach ($links as $link) {
                 if ($link->hasAttribute('href')&& preg_match($this->config()->email_regex, $link->getAttribute('href'), $matches)) {
