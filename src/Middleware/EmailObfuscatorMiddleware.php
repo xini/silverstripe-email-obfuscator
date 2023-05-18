@@ -142,7 +142,7 @@ class EmailObfuscatorMiddleware implements HTTPMiddleware
         // plaintext, only if not in html value attribute
         $regex = '/((?<!")(?<![A-Z0-9\._%+\-])([A-Z0-9\._%+\-]+@[A-Z0-9\.\-]+\.[A-Z]{2,8})(?![A-Z]))/i';
 
-        $result = preg_replace_callback($regex, "self::getReplacement", $html);
+        $result = preg_replace_callback($regex, self::class . '::getReplacement', $html);
 
         return $result;
     }
