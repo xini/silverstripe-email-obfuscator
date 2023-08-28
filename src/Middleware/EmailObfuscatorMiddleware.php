@@ -40,7 +40,7 @@ class EmailObfuscatorMiddleware implements HTTPMiddleware
 
             // replace email links usig DOMDocument parser
             $html5 = new HTML5();
-            $dom = $html5->loadHTML($html);
+            $dom = $html5->loadHTML($html ?? '');
             $links = $dom->getElementsByTagName('a');
             foreach ($links as $link) {
                 if ($link->hasAttribute('href')&& preg_match($this->config()->email_regex, $link->getAttribute('href'), $matches)) {
@@ -142,7 +142,7 @@ class EmailObfuscatorMiddleware implements HTTPMiddleware
         // plaintext, only if not in html value attribute
         $regex = '/((?<!")(?<![A-Z0-9\._%+\-])([A-Z0-9\._%+\-]+@[A-Z0-9\.\-]+\.[A-Z]{2,8})(?![A-Z]))/i';
 
-        $result = preg_replace_callback($regex, "self::getReplacement", $html);
+        $result = preg_replace_callback($regex, self::class . '::getReplacement', $html);
 
         return $result;
     }
@@ -181,7 +181,7 @@ class EmailObfuscatorMiddleware implements HTTPMiddleware
     }
 
     private function getLinkText($linktext) {
-        $default = _t(self::class.".NotDisplayed", '[E-Mail not displayed]');
+        $default = _t(__CLASS__ . ".NotDisplayed", '[E-Mail not displayed]');
         if (preg_match($this->config()->email_regex, $linktext)) {
             $linktext = $default;
         }
@@ -189,7 +189,7 @@ class EmailObfuscatorMiddleware implements HTTPMiddleware
     }
 
     private function getLinkTitle($linktext) {
-        $default = _t(self::class.".NotDisplayedWithoutJavascript", 'E-Mail not displayed without javascript.');
+        $default = _t(__CLASS__ . ".NotDisplayedWithoutJavascript", 'E-Mail not displayed without javascript.');
         if (preg_match($this->config()->email_regex, $linktext)) {
             $linktext = $default;
         }

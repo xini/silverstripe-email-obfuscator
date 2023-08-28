@@ -15,7 +15,7 @@
 	"require": {
 		"silverstripe/vendor-plugin": "^1.0",
 		"silverstripe/cms": "^4",
-		"masterminds/html5": "~2.7.4"
+		"masterminds/html5": "^2.8"
 	},
 	"autoload": {
 		"psr-4": {
