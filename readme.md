@@ -23,6 +23,19 @@ composer require innoweb/silverstripe-email-obfuscator dev-master
 ```
 and run dev/build.
 
+## Usage
+
+All email addresses on a page get obfuscated by a middleware and then rewritten back to email links via Javascript.
+
+If you need to skip obfuscation of certain links, you can add the `skip-email-obfuscation` class to their tag.
+
+This is useful for e.g. Mastodon links that are falsly recognised as emails:
+
+```html
+<a href="https://mastodon.social/@sminnee@mastodon.nz" class="skip-email-obfuscation">Sam Minnée on Mastodon</a>
+
+```
+
 ## License
 
 BSD 3-Clause License, see [License](license.md)

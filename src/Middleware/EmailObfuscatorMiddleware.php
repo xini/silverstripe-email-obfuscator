@@ -12,7 +12,15 @@ class EmailObfuscatorMiddleware implements HTTPMiddleware
 {
     use Configurable;
 
+	/**
+	 * @var string generic email regex
+	 */
     private static $email_regex = '/[A-Z0-9\._%+\-]+@[A-Z0-9\.\-]+\.[A-Z]{2,8}/i';
+
+	/**
+	 * @var string email regex for plaintext, excluding values in html attribues
+	 */
+	private static $email_regex_plaintext = '/((?<!["])(?<![^ <>])([A-Z0-9\._%+\-]+@[A-Z0-9\.\-]+\.[A-Z]{2,8})(?![A-Z]))/i';
 
     /**
      * Obfuscate all email addreses contained in response body.
@@ -43,7 +51,10 @@ class EmailObfuscatorMiddleware implements HTTPMiddleware
             $dom = $html5->loadHTML($html ?? '');
             $links = $dom->getElementsByTagName('a');
             foreach ($links as $link) {
-                if ($link->hasAttribute('href')&& preg_match($this->config()->email_regex, $link->getAttribute('href'), $matches)) {
+                if ($link->hasAttribute('href')
+					&& (!$link->hasAttribute('class') || !str_contains($link->getAttribute('class'), 'skip-email-obfuscation'))
+					&& preg_match($this->config()->email_regex, $link->getAttribute('href'), $matches)
+				) {
                     $email = $matches[0];
                     $link->setAttribute('href', '#');
                     $link->setAttribute('rel', 'nofollow');
@@ -67,12 +78,12 @@ class EmailObfuscatorMiddleware implements HTTPMiddleware
                 $parts = array(
                     // encode email contained in head with ASCII/HEX method
                     $head => $this->obfuscateEmailSimple($head),
-                    // obfuscate palintext email addresses for JS method
+                    // obfuscate plaintext email addresses for JS method
                     $body => $this->obfuscateEmailForJavascript($body)
                 );
                 $html = implode('</head>', $parts);
             } else {
-                // obfuscate palintext email addresses for JS method
+                // obfuscate plaintext email addresses for JS method
                 $html = $this->obfuscateEmailForJavascript($html);
             }
 
@@ -139,8 +150,8 @@ class EmailObfuscatorMiddleware implements HTTPMiddleware
     {
         $regex = array();
 
-        // plaintext, only if not in html value attribute
-        $regex = '/((?<!")(?<![A-Z0-9\._%+\-])([A-Z0-9\._%+\-]+@[A-Z0-9\.\-]+\.[A-Z]{2,8})(?![A-Z]))/i';
+        // plaintext, only if not in html attribute
+        $regex = $this->config()->email_regex_plaintext;
 
         $result = preg_replace_callback($regex, self::class . '::getReplacement', $html);
 
