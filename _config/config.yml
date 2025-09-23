@@ -11,5 +11,4 @@ SilverStripe\Core\Injector\Injector:
 
 PageController:
   extensions:
-    - Innoweb\EmailObfuscator\Extensions\PageControllerExtension  
-  
+    - Innoweb\EmailObfuscator\Extensions\PageControllerExtension

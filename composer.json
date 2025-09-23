@@ -13,9 +13,9 @@
 		"homepage": "https://innoweb.com.au"
 	}],
 	"require": {
-		"silverstripe/vendor-plugin": "^2.0",
-		"silverstripe/cms": "^5",
-		"masterminds/html5": "^2.8"
+		"silverstripe/cms": "^6",
+		"silverstripe/vendor-plugin": "^3",
+		"masterminds/html5": "^2.10.0"
 	},
 	"autoload": {
 		"psr-4": {
